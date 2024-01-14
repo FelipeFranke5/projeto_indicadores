@@ -1,0 +1,57 @@
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  {% load django_bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+</head>
+<body>
+  <div class="container p-5 bg-light mt-5">
+
+    <div class="row">
+
+      <div class="col-auto">
+
+        <form action="{% url 'accounts:login' %}" method="post">
+          {% csrf_token %}
+
+          <div class="mb-3">
+            <label class="mb-1 fw-light" for="username">Nome de Usuário:</label>
+            {% render_field form.username class="form-control form-control-sm" %}
+          </div>
+
+          <div class="mb-3">
+            <label class="mb-1 fw-light" for="password">Senha:</label>
+            {% render_field form.password class="form-control form-control-sm" %}
+          </div>
+
+          <button class="btn btn-primary btn-sm mb-3" type="submit">Login</button>
+        </form>
+
+      </div>
+
+      <div class="col-auto">
+
+        {% if form.errors %}
+          <div class="alert alert-danger">
+            <h4 class="alert-heading text-center">Credenciais Inválidas!</h4>
+            <hr>
+            <p class="fw-light text-center">Por favor, verifique a combinação de Usuário/Senha.</p>
+          </div>
+        {% endif %}
+
+      </div>
+
+      <hr>
+      <a href="{% url 'accounts:cadastro' %}">Criar Cadastro</a>
+
+    </div>
+  </div>
+
+</body>
+</html>

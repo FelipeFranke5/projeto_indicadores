@@ -1,0 +1,116 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criar Conta</title>
+  {% load django_bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+</head>
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"'>
+  <div class="container p-5 bg-light mt-5">
+
+    <div class="row">
+
+      <div class="col-auto">
+
+        <form action="{% url 'accounts:cadastro' %}" method="post">
+          {% csrf_token %}
+
+          <div class="mb-3">
+            <label class="mb-1 fw-light" for="username">Crie um Nome de Usuário:</label>
+            {% render_field form.username class="form-control form-control-sm" hx-post="/accounts/usuario/" hx-target="#campos" hx-trigger="keyup" hx-swap="outerHTML" %}
+            <div id="campos">
+              <ul class="list-group mt-2">
+                <li class="list-group-item fw-light" id="usuario_exis"><small>* O Usuário deve ser único!</small></li>
+                <li class="list-group-item fw-light" id="campo_obrigatorio"><small>* Campo obrigatório.</small></li>
+                <li class="list-group-item fw-light" id="campo_min_5"><small>Opcional: Recomendamos no mínimo 5 caracteres.</small></li>
+                <li class="list-group-item fw-light" id="campo_max_150"><small>* No máximo 150 caracteres.</small></li>
+                <li class="list-group-item fw-light" id="campo_alfanum"><small>* Pode conter letras e números.</small></li>
+                <li class="list-group-item fw-light" id="campo_espec"><small>Opcional: Deve conter os caracteres especiais @/./+/-/_.</small></li>
+                <li class="list-group-item fw-light" id="campo_espec1"><small>* Não pode conter os caracteres especiais !#$%¨&*()</small></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="mb-1 fw-light" for="password1">Crie uma senha:</label>
+            {% render_field form.password1 class="form-control form-control-sm" hx-post="/accounts/senha1/" hx-target="#campos_senha1" hx-trigger="keyup" hx-swap="outerHTML" %}
+            <div id="campos_senha1">
+              <ul class="list-group mt-2">
+                <li class="list-group-item fw-light" id="senha1_obrigatorio"><small>* Campo obrigatório.</small></li>
+                <li class="list-group-item fw-light" id="senha1_min"><small>* No mínimo 8 caracteres.</small></li>
+                <li class="list-group-item fw-light" id="senha1_max"><small>* No máximo 128 caracteres.</small></li>
+                <li class="list-group-item fw-light" id="senha1_usuario"><small>* Não pode ser parecida com o Nome de Usuário.</small></li>
+                <li class="list-group-item fw-light" id="senha1_numerica"><small>* Não pode conter apenas números.</small></li>
+                <li class="list-group-item fw-light" id="senha1_com"><small>* Não pode ser muito comum.</small></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="mb-1 fw-light" for="password2">Confirme a senha:</label>
+            {% render_field form.password2 class="form-control form-control-sm" hx-post="/accounts/senha2/" hx-target="#campos_senha2" hx-trigger="keyup" hx-swap="outerHTML" %}
+            <div id="campos_senha2">
+              <ul class="list-group mt-2">
+                <li class="list-group-item fw-light" id="senha2_obrigatorio"><small>* Campo obrigatório.</small></li>
+                <li class="list-group-item fw-light" id="senha2_igual"><small>* Deve ser igual à senha que registrou acima.</small></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="mb-1 fw-light" for="recaptcha">Captcha de segurança:</label>
+            {% render_field form.recaptcha %}
+          </div>
+
+          <button class="btn btn-primary btn-sm mb-3" type="submit">Cadastrar</button>
+        </form>
+      </div>
+
+      <div class="col-auto">
+
+        {% if form.errors %}
+          <div class="alert alert-danger">
+            <h4 class="alert-heading text-center">Erro ao efetuar cadastro!</h4>
+            <hr>
+            {% for key, value in form.errors.items %}
+              {% if key == "username" %}
+                <p>Erro na definição do <strong>Nome de Usuário</strong>.</p>
+              {% elif key == "password1" %}
+                <p>Erro na definição da <strong>Senha</strong>.</p>
+              {% elif key == "password2" %}
+                <p>Erro na <strong>confirmação</strong> da Senha.</p>
+                <p>Obs: O erro na <strong>confirmação</strong> da Senha pode acontecer em dois casos:</p>
+                <ul class="list-group">
+                  <li class="list-group-item list-group-item-danger"><strong>Caso 1:</strong> As Senhas estão DIVERGENTES.</li>
+                  <li class="list-group-item list-group-item-danger mb-3"><strong>Caso 2:</strong> A Senha possui erros.</li>
+                </ul>
+              {% endif %}
+
+              <p>Erro(s):</p>
+              <ul class="list-group">
+                {% for erro in value %}
+                  <li class="list-group-item list-group-item-danger">{{ erro }}</li>
+                {% endfor %}
+              </ul>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+      </div>
+
+      <hr>
+      <a href="{% url 'accounts:login' %}">Login</a>
+
+    </div>
+
+  </div>
+  
+  <script src="{% static 'js/htmx.min.js' %}"></script>
+</body>
+</html>

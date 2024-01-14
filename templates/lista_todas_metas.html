@@ -1,0 +1,53 @@
+<div class="row justify-content-center mt-2">
+
+  {% if metas %}
+  <div>
+    <div class="table-responsive">
+      <table class="table table-striped table-light table-hover table-bordered text-center table align-middle">
+        <tr class="table-warning">
+          <th>ID:</th>
+          <th>DATA:</th>
+          <th>TMO:</th>
+          <th>ADR:</th>
+          <th>P2:</th>
+          <th>P3:</th>
+          <th>REC:</th>
+          <th>SHORT:</th>
+          <th>ABS:</th>
+          <th>T.DEMAIS:</th>
+          <th>T.PESQ:</th>
+        </tr>
+        {% for meta in metas %}
+        <tr>
+          <td>{{ meta.id }}</td>
+          <td>{{ meta.data_referencia }}</td>
+          <td>{{ meta.tmo }}</td>
+          <td>{{ meta.aderencia }}%</td>
+          <td>{{ meta.nps2 }}%</td>
+          <td>{{ meta.nps3 }}%</td>
+          <td>{{ meta.rechamada }}%</td>
+          <td>{{ meta.shortcall }}%</td>
+          <td>{{ meta.abs }}%</td>
+          <td>{{ meta.transf_demais_ilhas }}%</td>
+          <td>{{ meta.transf_pesquisa }}%</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+    <div class="text-center">
+      <input type="submit" class="btn btn-outline-danger btn-sm mt-2 mb-3" value="Fechar" hx-get="{% url 'main:todas_metas_fechar' %}" hx-target="#metas_todos" hx-trigger="click">
+    </div>
+    
+  </div>
+  {% else %}
+  <div>
+    <p>Não há metas para exibir.</p>
+
+    <div class="text-center">
+      <input type="submit" class="btn btn-outline-danger btn-sm mt-2 mb-3" value="Fechar" hx-get="{% url 'main:todas_metas_fechar' %}" hx-target="#metas_todos" hx-trigger="click">
+    </div>
+  
+  </div>
+  {% endif %}
+</div>

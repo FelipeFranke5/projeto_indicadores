@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+
+  <div class="w-75">
+
+    <form action="{% url 'main:nova_meta' %}" method="post">
+      {% csrf_token %}
+
+      <div class="mb-2">
+        <label for="tmo" class="form-label fw-bold text-primary-emphasis">tmo:</label>
+        <input type="number" class="form-control form-control-sm" step="0.01" name="tmo" id="tmo" required>
+      </div>
+
+      <div class="mb-2">
+        <label for="aderencia" class="form-label fw-bold text-primary-emphasis">aderência:</label>
+        <input type="number" class="form-control form-control-sm" step="0.01" name="aderencia" id="aderencia" required>
+      </div>
+
+      <div class="mb-2">
+        <label for="nps2" class="form-label fw-bold text-primary-emphasis">nps2:</label>
+        <input type="number" class="form-control form-control-sm" step="0.01" name="nps2" id="nps2" required>
+      </div>
+
+      <div class="mb-2">
+        <label for="nps3" class="form-label fw-bold text-primary-emphasis">nps3:</label>
+        <input type="number" class="form-control form-control-sm" step="0.01" name="nps3" id="nps3">
+      </div>
+
+      <div class="mb-2">
+        <label for="rechamada" class="form-label fw-bold text-primary-emphasis">rechamada:</label>
+        <input type="number" class="form-control form-control-sm" step="0.01" name="rechamada" id="rechamada" required>
+      </div>
+
+      <div class="mb-2">
+        <label for="shortcall" class="form-label fw-bold text-primary-emphasis">shortcall:</label>
+        <input type="number" class="form-control form-control-sm" step="0.01" name="shortcall" id="shortcall" required>
+      </div>
+
+      <div class="mb-2">
+        <label for="abs" class="form-label fw-bold text-primary-emphasis">abs:</label>
+        <input type="number" class="form-control form-control-sm" step="0.01" name="abs" id="abs" required>
+      </div>
+
+      <div class="mb-2">
+        <label for="transf_demais_ilhas" class="form-label fw-bold text-primary-emphasis">transf. demais ilhas:</label>
+        <input type="number" class="form-control form-control-sm" step="0.01" name="transf_demais_ilhas" id="transf_demais_ilhas" required>
+      </div>
+
+      <div class="mb-2">
+        <label for="transf_pesquisa" class="form-label fw-bold text-primary-emphasis">transf. pesquisa:</label>
+        <input type="number" class="form-control form-control-sm" step="0.01" name="transf_pesquisa" id="transf_pesquisa" required>
+      </div>
+
+      <div class="text-center">
+        <input type="submit" class="btn btn-outline-primary btn-sm mt-2 mb-3" value="Enviar Meta">
+        <input type="submit" class="btn btn-outline-danger btn-sm mt-2 mb-3" value="Fechar" hx-get="{% url 'main:fechar_form_cadastro_meta' %}" hx-target="#form_cadastro_meta" hx-trigger="click">
+      </div>
+    </form>
+
+  </div>
+</div>

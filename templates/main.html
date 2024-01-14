@@ -1,0 +1,66 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Indicadores</title>
+  {% load django_bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+  <script src="{% static 'js/htmx.min.js' %}"></script>
+</head>
+<body>
+
+  <div class="container p-5 mt-5 rounded bg-light">
+    <!-- Início - Botão 'Cadastro Indicador' -->
+    <div class="row justify-content-center mb-1">
+      <h5 class="text-success mb-3 fw-light">Logado com: <strong>{{ user.username }}</strong></h5>
+      <span class="btn btn-secondary w-50 btn-sm" hx-get="{% url 'main:form_cadastro_indicador' %}" hx-target="#form_cadastro_indicador">Cadastrar Indicador</span>
+    </div>
+    <div id="form_cadastro_indicador"></div>
+    <!-- Fim - Botão 'Cadastro Indicador' -->
+    <hr>
+
+    <!-- Início - Botão 'Cadastro Meta' -->
+    <div class="row justify-content-center mb-3">
+      <span class="btn btn-primary w-50 btn-sm" hx-get="{% url 'main:form_cadastro_meta' %}" hx-target="#form_cadastro_meta">Cadastrar Meta</span>
+    </div>
+    <div id="form_cadastro_meta"></div>
+    <!-- Fim - Botão 'Cadastro Meta' -->
+    <hr>
+
+    <!-- Início - Indicador Principal' -->
+    <div class="row justify-content-center mb-3">
+      {% include 'indicador_principal.html' %}
+    </div>
+    <!-- Fim - Indicador Principal -->
+    <hr>
+
+    <!--Início - Histórico de Indicadores-->
+    <div class="row justify-content-center mb-1">
+      <span class="btn btn-success w-50 btn-sm" hx-get="{% url 'main:todos_indicadores' %}" hx-target="#indicadores_todos">Histórico de Indicadores</span>
+    </div>
+    <div id="indicadores_todos"></div>
+    <!--Fim - Histórico de Indicadores-->
+    <hr>
+
+    <!--Início - Histórico de Metas-->
+    <div class="row justify-content-center mb-1">
+      <span class="btn btn-success w-50 btn-sm" hx-get="{% url 'main:todas_metas' %}" hx-target="#metas_todos">Histórico de Metas</span>
+    </div>
+    <div id="metas_todos"></div>
+    <!--Fim - Histórico de Metas-->
+    <hr>
+    
+    <div class="row justify-content-center mb-1 text-center">
+      <form action="{% url 'accounts:logout' %}" method="post">
+        {% csrf_token %}
+        <button class="btn btn-primary btn-sm" type="submit">Logout</button>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

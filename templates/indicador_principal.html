@@ -1,0 +1,122 @@
+<div class="row justify-content-center">
+
+  <div class="border p-5 rounded" style="background-color: rgb(247, 238, 248)">
+
+    {% if indicadores %}
+    <div>
+      {% for indicador in indicadores %}
+
+      {% if forloop.last %}
+      <div class="table-responsive">
+        <table class="table table-striped table-light table-hover table-bordered text-center table align-middle">
+          <tr class="table-warning">
+            <th>DATA:</th>
+            <th>TMO:</th>
+            <th>ADR:</th>
+            <th>P2:</th>
+            <th>P3:</th>
+            <th>REC:</th>
+            <th>SHORT:</th>
+            <th>ABS:</th>
+            <th>T.DEMAIS:</th>
+            <th>T.PESQ:</th>
+            <th>DENTRO_META:</th>
+            <th>DESATUALIZADO:</th>
+          </tr>
+
+          <tr>
+            <td class="table-info">{{ indicador.data_registro }}</td>
+
+            {% if "tmo" in indicador.indicadores_dentro_meta %}
+            <td class="table-primary">{{ indicador.tmo }}</td>
+            {% else %}
+            <td class="table-danger">{{ indicador.tmo }}</td>
+            {% endif %}
+
+
+            {% if "aderencia" in indicador.indicadores_dentro_meta %}
+            <td class="table-primary">{{ indicador.aderencia }}%</td>
+            {% else %}
+            <td class="table-danger">{{ indicador.aderencia }}%</td>
+            {% endif %}
+
+
+            {% if "nps2" in indicador.indicadores_dentro_meta %}
+            <td class="table-primary">{{ indicador.nps2 }}%</td>
+            {% else %}
+            <td class="table-danger">{{ indicador.nps2 }}%</td>
+            {% endif %}
+
+
+            {% if "nps3" in indicador.indicadores_dentro_meta %}
+            <td class="table-primary">{{ indicador.nps3 }}%</td>
+            {% else %}
+            <td class="table-danger">{{ indicador.nps3 }}%</td>
+            {% endif %}
+
+
+            {% if "rechamada" in indicador.indicadores_dentro_meta %}
+            <td class="table-primary">{{ indicador.rechamada }}%</td>
+            {% else %}
+            <td class="table-danger">{{ indicador.rechamada }}%</td>
+            {% endif %}
+
+
+            {% if "shortcall" in indicador.indicadores_dentro_meta %}
+            <td class="table-primary">{{ indicador.shortcall }}%</td>
+            {% else %}
+            <td class="table-danger">{{ indicador.shortcall }}%</td>
+            {% endif %}
+
+
+            {% if "abs" in indicador.indicadores_dentro_meta %}
+            <td class="table-primary">{{ indicador.abs }}%</td>
+            {% else %}
+            <td class="table-danger">{{ indicador.abs }}%</td>
+            {% endif %}
+
+
+            {% if "transf_demais_ilhas" in indicador.indicadores_dentro_meta %}
+            <td class="table-primary">{{ indicador.transf_demais_ilhas }}%</td>
+            {% else %}
+            <td class="table-danger">{{ indicador.transf_demais_ilhas }}%</td>
+            {% endif %}
+
+
+            {% if "transf_pesquisa" in indicador.indicadores_dentro_meta %}
+            <td class="table-primary">{{ indicador.transf_pesquisa }}%</td>
+            {% else %}
+            <td class="table-danger">{{ indicador.transf_pesquisa }}%</td>
+            {% endif %}
+
+
+            {% if indicador.dentro_meta %}
+            <td class="table-primary">Sim</td>
+            {% else %}
+            <td class="table-danger">Não</td>
+            {% endif %}
+
+            {% if indicador.meta_desatualizada %}
+            <td class="table-danger">Sim</td>
+            {% else %}
+            <td class="table-primary">Não</td>
+            {% endif %}
+          </tr>
+        </table>
+      </div>
+      {% endif %}
+      {% endfor %}
+
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-info fw-light">Se a meta estiver desatualizada, será necessário registrar o indicador novamente.</li>
+      </ul>
+
+    </div>
+
+    {% else %}
+    <div>
+      <p class="text-center">Não há indicadores para exibir.</p>
+    </div>
+    {% endif %}
+  </div>
+</div>

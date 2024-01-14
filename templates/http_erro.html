@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Erro ao processar a requisição</title>
+</head>
+<body>
+  {% if status_code == 500 %}
+    <p>Ocorreu um erro no servidor. Por favor, tente novamente mais tarde.</p>
+    <p>Status Code: <code>{{ status_code }}</code></p>
+  {% elif status_code == 400 %}
+    <p>Ocorreu um erro na requisição, pois os dados de entrada estão inválidos.</p>
+    <p>Status Code: <code>{{ status_code }}</code></p>
+    {% if json %}
+      <p>JSON: <strong>{{ json }}</strong></p>
+    {% endif %}
+  {% else %}
+    <p>Falha na requisição.</p>
+    <p>Status Code: <code>{{ status_code }}</code></p>
+    {% if json %}
+      <p>JSON: <strong>{{ json }}</strong></p>
+    {% endif %}
+  {% endif %}
+</body>
+</html>
