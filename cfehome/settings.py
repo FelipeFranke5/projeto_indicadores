@@ -13,8 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 if not os.path.exists("secret.env"):
     raise ImproperlyConfigured(
         "A chave secreta em 'SECRET_KEY' é obrigatória! "
-        "Crie um arquivo com nome 'secret.env' e armazene a "
-        "credencial SECRET_KEY em uma variável de ambiente."
+        "Crie um arquivo com nome 'secret.env'"
     )
 
 arquivo_secret_key = dotenv_values("secret.env")
@@ -25,7 +24,7 @@ SECRET_KEY = arquivo_secret_key["SECRET_KEY"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [arquivo_secret_key["IP_GLOBAL"]]
 
 
 # Application definition
