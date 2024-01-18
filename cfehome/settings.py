@@ -22,7 +22,7 @@ arquivo_secret_key = dotenv_values("secret.env")
 SECRET_KEY = arquivo_secret_key["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [arquivo_secret_key["IP_GLOBAL"]]
 
